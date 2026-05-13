@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Jamie</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/chat.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand comic-font" href="#">
+            <i class="fas fa-robot me-2"></i> Jamie
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="childNameDisplay">
+                        <i class="fas fa-child me-1"></i>
+                        <span id="childName">Friend</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="parentEmailDisplay">
+                        <i class="fas fa-user-shield me-1"></i> Parent
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <button class="btn btn-outline-primary btn-sm ms-2" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt me-1"></i> Logout
+                    </button>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ================= MAIN CONTAINER ================= -->
+<div class="container-fluid main-chat-container">
+    <div class="row g-0">
+
+        <!-- ===== CHAT AREA (LEFT) ===== -->
+        <div class="col-lg-9 chat-area">
+
+            <div class="chat-header">
+                <h2 class="comic-font">Chat with Jamie</h2>
+                <p>Jamie is excited to chat with you!</p>
+            </div>
+
+            <!-- Messages -->
+            <div class="chat-messages" id="chatMessages">
+                <div class="message jamie-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-sender">Jamie</div>
+                        <div class="message-text">
+                            Hello! I'm Jamie, your Ai buddy. What would you like to talk about today?
+                        </div>
+                        <div class="message-time">Just now</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input -->
+            <div class="chat-input-area">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="messageInput"
+                           placeholder="Type your message..." autocomplete="off">
+                    <button class="btn btn-primary" id="sendMessageBtn">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+
+                <div class="chat-actions mt-2">
+                    <button class="btn btn-sm btn-outline-secondary" id="clearChatBtn">
+                        <i class="fas fa-trash-alt me-1"></i> Clear
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" id="helpBtn">
+                        <i class="fas fa-question-circle me-1"></i> Help
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" id="emojiBtn">
+                        <i class="far fa-smile me-1"></i> Emoji
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== JAMIE SIDEBAR (RIGHT) ===== -->
+        <div class="col-lg-3 d-none d-lg-block sidebar">
+
+            <div class="robot-container">
+                <div class="chat-robot">
+                    <div class="chat-robot-head">
+                        <div class="chat-robot-face">
+                            <div class="chat-robot-eye left-eye"></div>
+                            <div class="chat-robot-eye right-eye"></div>
+                            <div class="chat-robot-smile"></div>
+                        </div>
+                    </div>
+
+                    <div class="chat-robot-body">
+                        <div class="chat-robot-screen">
+                            <div class="chat-screen-text">Ready!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="robot-status">
+                    <h4 class="comic-font">Jamie is online</h4>
+                    <div class="status-indicator online"></div>
+                    <p class="robot-greeting" id="dynamicGreeting">Hello there!</p>
+                </div>
+            </div>
+
+            <div class="chat-info">
+                <h5><i class="fas fa-info-circle me-2"></i> About Jamie</h5>
+                <div class="jamie-features">
+    <h5>✨ Discover Jamie's Cool Features</h5>
+    <div class="features-content"></div>
+                <div class="safety-reminder">
+                    <h6><i class="fas fa-shield-alt me-2"></i> Safety First</h6>
+                    <p>Never share personal information.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= EMOJI PICKER (STAR REMOVED) ================= -->
+<div class="emoji-picker" id="emojiPicker">
+    <div class="emoji-picker-header">
+        <h6>Select Emoji</h6>
+        <button class="btn-close btn-close-sm" id="closeEmojiPicker"></button>
+    </div>
+
+    <div class="emoji-list">
+        <span class="emoji">😊</span>
+        <span class="emoji">😂</span>
+        <span class="emoji">😍</span>
+        <span class="emoji">🤔</span>
+        <span class="emoji">😎</span>
+        <span class="emoji">🤖</span>
+        <span class="emoji">👍</span>
+        <span class="emoji">👋</span>
+        <span class="emoji">🎉</span>
+        <span class="emoji">❤️</span>
+    </div>
+</div>
+
+
+<!-- ================= SCRIPTS ================= -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../static/chat.js"></script>
+
+<!-- ================= PIANO POPUP ================= -->
+<div id="pianoPopup" style="display:none; position:fixed; top:50%; left:50%;
+transform:translate(-50%, -50%);
+width:800px; height:400px;
+background: linear-gradient(145deg,#fff,#d0e6ff);
+border-radius:25px;
+box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+padding:20px;
+z-index:1000;
+font-family:'Comic Neue', sans-serif;">
+
+    <h2 style="font-weight:bold;">🎹 Play the Piano 🎹</h2>
+
+    <div id="pianoKeys" style="display:flex; justify-content:center; margin-top:30px;">
+        <div class="key white" data-note="C">C</div>
+        <div class="key white" data-note="D">D</div>
+        <div class="key white" data-note="E">E</div>
+        <div class="key white" data-note="F">F</div>
+        <div class="key white" data-note="G">G</div>
+        <div class="key white" data-note="A">Sp</div>
+        <div class="key white" data-note="B">Sp</div>
+    </div>
+
+    <button onclick="closePianoPopup()"
+        style="margin-top:30px; padding:10px 25px;
+        font-size:18px; font-weight:bold;
+        color:white; background: linear-gradient(135deg,#4facfe,#00f2fe);
+        border:none; border-radius:12px; cursor:pointer;">
+        Close
+    </button>
+</div>
+
+
+<!-- ================= APPLE COUNTING POPUP ================= -->
+<div id="applePopup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+background: linear-gradient(to bottom, #fffae3, #c6f1ff); border-radius:20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+padding:20px; text-align:center; z-index:1000; width:500px; height:520px; overflow:hidden; font-family: 'Comic Neue', sans-serif;">
+    <h3 style="font-size:24px;">🍎 Counting Apples 🍎</h3>
+    <div id="appleArea" style="position:relative; width:100%; height:350px; margin-top:10px;"></div>
+    <div id="appleResult" style="margin-top:15px; font-size:22px; font-weight:bold; text-align:center; opacity:0; transition: all 1s ease;"></div>
+    <button class="btn btn-primary mt-3" style="position:relative; z-index:10;" onclick="closePopup()">Close</button>
+</div>
+
+<!-- Alphabet Popup -->
+<div id="alphabetPopup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+width:650px; height:500px; background: linear-gradient(145deg,#fef9f3,#d0e6ff);
+border-radius:25px; box-shadow: 0 15px 40px rgba(0,0,0,0.25); padding:20px; text-align:center; z-index:1000;
+font-family:'Comic Neue', sans-serif;">
+    <h2 style="font-weight:bold; font-size:26px; color:#333;">🔤 Alphabet A-Z 🔤</h2>
+    <div id="alphabetArea" style="display:grid; grid-template-columns: repeat(7, 70px); gap:15px; justify-content:center; margin-top:25px;"></div>
+    <button onclick="closeAlphabetPopup()" style="
+        margin-top:25px; padding:10px 25px; font-size:18px; font-weight:bold;
+        color:white; background: linear-gradient(135deg,#4facfe,#00f2fe);
+        border:none; border-radius:12px; cursor:pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;">Close</button>
+</div>
+
+
+
+<!-- Light background music for popup -->
+<audio id="appleSong" src="https://www.orangefreesounds.com/wp-content/uploads/2021/07/Uplifting-instrumental-music.mp3" loop></audio>
+
+
+<!-- ================= APPLE COUNTING POPUP ================= -->
+<div id="applePopup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+background: linear-gradient(to bottom, #fffae3, #c6f1ff); border-radius:20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+padding:20px; text-align:center; z-index:1000; width:500px; height:520px; overflow:hidden; font-family: 'Comic Neue', sans-serif;">
+    <h3 style="font-size:24px;">🍎 Counting Apples 🍎</h3>
+    <div id="appleArea" style="position:relative; width:100%; height:350px; margin-top:10px;"></div>
+    <div id="appleResult" style="margin-top:15px; font-size:22px; font-weight:bold; text-align:center; opacity:0; transition: all 1s ease;"></div>
+    <button class="btn btn-primary mt-3" style="position:relative; z-index:10;" onclick="closePopup()">Close</button>
+</div>
+
+<audio id="abcMusic" loop controls>
+    <source src="/static/audio/abc-song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+
+<!-- Counting 1-50 Popup -->
+<div id="numberPopup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+width:880px; height:550px; background: linear-gradient(145deg,#fff8e1,#c0e6ff);
+border-radius:25px; box-shadow: 0 15px 40px rgba(0,0,0,0.25); padding:20px; text-align:center; z-index:1000;
+font-family:'Comic Neue', sans-serif;">
+    <h2 style="font-weight:bold; font-size:26px; color:#333;">🔢 Counting 1 to 50 🔢</h2>
+    <div id="numberArea" style="display:grid; grid-template-columns: repeat(10, 75px); gap:12px; justify-content:center; margin-top:25px;"></div>
+    <button onclick="closeNumberPopup()" style="
+        margin-top:25px; padding:10px 25px; font-size:18px; font-weight:bold;
+        color:white; background: linear-gradient(135deg,#4facfe,#00f2fe);
+        border:none; border-radius:12px; cursor:pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;">Close</button>
+</div>
+
+<audio id="numberMusic" loop controls>
+    <source src="/static/audio/One To Fifty Number Song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<!-- Table Popup -->
+<div id="tablePopup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+width:600px; height:520px; background: linear-gradient(145deg,#e6fff5,#d0e6ff);
+border-radius:25px; box-shadow: 0 15px 40px rgba(0,0,0,0.25); padding:20px; text-align:center; z-index:1000;
+font-family:'Comic Neue', sans-serif;">
+    <h2 id="tableTitle" style="font-weight:bold; font-size:26px;">📊 Table 📊</h2>
+
+    <div id="tableArea" style="display:grid; grid-template-columns: repeat(3, 150px);
+gap:15px; justify-content:center; margin-top:25px;"></div>
+
+    <button onclick="closeTablePopup()" style="
+        margin-top:25px; padding:10px 25px; font-size:18px; font-weight:bold;
+        color:white; background: linear-gradient(135deg,#4facfe,#00f2fe);
+        border:none; border-radius:12px; cursor:pointer;">Close</button>
+</div>
+
+<audio id="tableMusic" loop>
+    <source src="/static/audio/table-song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+
+
+<script>
+    // ------------------------------Addition------------------------------
+const appleSong = document.getElementById('appleSong');
+appleSong.volume = 0.2; // halki background music
+
+function showApplePopup(first, second){
+    const popup = document.getElementById('applePopup');
+    const appleArea = document.getElementById('appleArea');
+    const appleResult = document.getElementById('appleResult');
+    popup.style.display = 'block';
+    appleArea.innerHTML = '';
+    appleResult.innerHTML = '';
+    appleResult.style.opacity = 0;
+
+    // Play music
+    appleSong.currentTime = 0;
+    appleSong.play();
+
+    let total = first + second;
+    let apples = [];
+
+    for(let i=0;i<total;i++){
+        const apple = document.createElement('div');
+        apple.innerText = '🍎';
+        apple.style.position = 'absolute';
+        apple.style.fontSize = '40px';
+        apple.style.top = '0px';
+        apple.style.left = `${Math.random() * (appleArea.offsetWidth - 40)}px`;
+        apple.style.transition = 'top 0.3s ease';
+        appleArea.appendChild(apple);
+        apples.push({el: apple, vy: 0});
+    }
+
+    const farmer = document.createElement('div');
+    farmer.innerText = '👨‍🌾';
+    farmer.style.position = 'absolute';
+    farmer.style.bottom = '10px';
+    farmer.style.left = '0px';
+    farmer.style.fontSize = '50px';
+    farmer.style.transition = 'left 0.2s linear, transform 0.2s';
+    appleArea.appendChild(farmer);
+
+    function fall(){
+        let allOnGround = true;
+        apples.forEach(appleObj => {
+            let apple = appleObj.el;
+            let top = parseFloat(apple.style.top);
+            if(top < 250){
+                appleObj.vy += 0.25; 
+                appleObj.vy *= 0.98;
+                apple.style.top = Math.min(top + appleObj.vy, 250) + 'px';
+                if(parseFloat(apple.style.top) < 250) allOnGround = false;
+            }
+        });
+
+        if(!allOnGround){
+            requestAnimationFrame(fall);
+        } else {
+            setTimeout(collectApples, 1000);
+        }
+    }
+
+    let collected = 0;
+    function collectApples(){
+        if(collected < apples.length){
+            let targetApple = apples[collected].el;
+            let appleX = targetApple.offsetLeft;
+            const farmerStep = () => {
+                let farmerPos = parseFloat(farmer.style.left);
+                if(Math.abs(farmerPos - appleX) > 1){
+                    let direction = farmerPos < appleX ? 1 : -1;
+                    farmer.style.left = (farmerPos + direction*2) + 'px';
+                    requestAnimationFrame(farmerStep);
+                } else {
+                    farmer.style.transform = 'translateY(-15px)';
+                    setTimeout(()=>{ farmer.style.transform = 'translateY(0)'; }, 300);
+                    targetApple.remove();
+                    collected++;
+                    setTimeout(collectApples, 300); 
+                }
+            }
+            farmerStep();
+        } else {
+            const farmerWalkOff = () => {
+                let pos = parseFloat(farmer.style.left);
+                if(pos < appleArea.offsetWidth - 50){
+                    farmer.style.left = (pos + 3) + 'px'; 
+                    requestAnimationFrame(farmerWalkOff);
+                } else {
+                    appleResult.innerHTML = `🎉 Wow! ${first} + ${second} = ${total} 🍎`;
+                    appleResult.style.opacity = 1;
+
+                    // Auto-close popup after 5s
+                    setTimeout(() => {
+                        closePopup();
+                    }, 5000);
+                }
+            }
+            farmerWalkOff();
+        }
+    }
+
+    fall();
+}
+
+function closePopup(){
+    const popup = document.getElementById('applePopup');
+    popup.style.display = 'none';
+    appleSong.pause();  // stop music
+}
+
+// Enter key listener
+document.getElementById('messageInput').addEventListener('keypress', function(e){
+    if(e.key === 'Enter'){
+        e.preventDefault();
+        checkForAddition(this.value);
+    }
+});
+
+// Send button listener
+document.getElementById('sendMessageBtn').addEventListener('click', function(){
+    let input = document.getElementById('messageInput');
+    checkForAddition(input.value);
+});
+
+function checkForAddition(val){
+    let match = val.trim().match(/^(\d+)\s*\+\s*(\d+)$/);
+    if(match){
+        let first = parseInt(match[1]);
+        let second = parseInt(match[2]);
+
+        // Jamie chat message before popup
+        const chatMessages = document.getElementById('chatMessages');
+        const jamieMsg = document.createElement('div');
+        jamieMsg.classList.add('message', 'jamie-message');
+        jamieMsg.innerHTML = `
+            <div class="message-avatar"><i class="fas fa-robot"></i></div>
+            <div class="message-content">
+                <div class="message-sender">Jamie</div>
+                <div class="message-text">Hmm! ${first} apple + ${second} apple = ? 🍎 Let's see!</div>
+                <div class="message-time">Just now</div>
+            </div>
+        `;
+        chatMessages.appendChild(jamieMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        setTimeout(()=> showApplePopup(first, second), 1000); // Delay for Jamie message
+        return true;
+    }
+    return false;
+}
+
+
+
+// ________________________Alphabets____________________________
+
+function getRandomColor() {
+    const colors = ['#FFB6C1','#87CEFA','#FFD700','#90EE90','#FFA07A','#BA55D3','#40E0D0'];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function showAlphabetPopup() {
+    const popup = document.getElementById('alphabetPopup');
+    const area = document.getElementById('alphabetArea');
+    popup.style.display = 'block';
+    area.innerHTML = ''; // clear previous
+
+    // Play background music
+    const music = document.getElementById('abcMusic');
+    music.currentTime = 0; // start from beginning
+    music.play().catch(err => {
+        console.log("Music play failed:", err);
+    });
+
+    let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+
+    letters.forEach(letter => {
+        const box = document.createElement('div');
+        box.innerText = letter;
+        box.style.width = '60px';
+        box.style.height = '60px';
+        box.style.background = getRandomColor();
+        box.style.borderRadius = '12px';
+        box.style.display = 'flex';
+        box.style.alignItems = 'center';
+        box.style.justifyContent = 'center';
+        box.style.fontWeight = 'bold';
+        box.style.fontSize = '22px';
+        box.style.color = '#333';
+        box.style.cursor = 'pointer';
+        box.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+        box.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+
+        // Hover effect
+        box.addEventListener('mouseenter', () => {
+            box.style.transform = 'scale(1.3)';
+            box.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
+        });
+        box.addEventListener('mouseleave', () => {
+            box.style.transform = 'scale(1)';
+            box.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+        });
+
+        area.appendChild(box);
+    });
+
+    //  Auto hover AFTER letters are in DOM
+    autoHoverLetters();
+
+    // Jamie's message
+    const jamieReply = "Wow! Look at all the letters! Let's learn them!";
+    addMessage(jamieReply, "jamie", "Jamie");
+
+    // Voice
+    let voices = window.speechSynthesis.getVoices();
+    if(!voices.length) {
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = window.speechSynthesis.getVoices();
+            speakJamie(jamieReply, voices);
+        }
+    } else {
+        speakJamie(jamieReply, voices);
+    }
+}
+
+
+function speakJamie(text, voices) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const selectedVoice = voices.find(v => v.lang === 'en-US') || voices[0];
+    utterance.voice = selectedVoice;
+    utterance.pitch = 1.5;
+    utterance.rate = 0.9;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+}
+
+// Close Alphabet Popup
+function closeAlphabetPopup() {
+    const popup = document.getElementById('alphabetPopup');
+    popup.style.display = 'none';
+}
+
+// Optional: Trigger popup via input
+document.getElementById('messageInput').addEventListener('keypress', function(e) {
+    if(e.key === 'Enter'){
+        e.preventDefault();
+        const text = this.value.trim().toLowerCase();
+        if(text === 'abc' || text === 'abcd' || text === 'alphabet' || text === 'alphabets') {
+            showAlphabetPopup();
+            this.value = '';
+        } else {
+            sendMessage();
+        }
+    }
+});
+
+function autoHoverLetters() {
+    const area = document.getElementById('alphabetArea');
+    const boxes = area.children;
+    let i = 0;
+
+    function highlightNext() {
+        if(i > 0) {
+            // Previous letter ko normal state me le aao
+            boxes[i-1].style.transform = 'scale(1)';
+            boxes[i-1].style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+        }
+        if(i < boxes.length){
+            // Current letter highlight
+            boxes[i].style.transform = 'scale(1.3)';
+            boxes[i].style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
+
+            i++;
+            setTimeout(highlightNext, 700); // har letter pe 0.7s delay
+        }
+    }
+
+    highlightNext();
+}
+
+
+function closeAlphabetPopup() {
+    const popup = document.getElementById('alphabetPopup');
+    popup.style.display = 'none';
+
+    // Stop music
+    const music = document.getElementById('abcMusic');
+    music.pause();
+    music.currentTime = 0;
+}
+
+
+
+// _____________________Counting____________________
+
+// ===================== RANDOM COLOR HELPER =====================
+function getRandomColor() {
+    const colors = ['#FFB6C1','#87CEFA','#FFD700','#90EE90','#FFA07A','#BA55D3','#40E0D0','#FF69B4','#FF6347','#7B68EE'];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// ===================== JAMIE SPEAK =====================
+function speakJamie(text){
+    let voices = window.speechSynthesis.getVoices();
+    if(!voices.length){
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = window.speechSynthesis.getVoices();
+            speakJamieVoice(text, voices);
+        }
+    } else {
+        speakJamieVoice(text, voices);
+    }
+}
+
+function speakJamieVoice(text, voices){
+    const utterance = new SpeechSynthesisUtterance(text);
+    const selectedVoice = voices.find(v => v.lang==='en-US') || voices[0];
+    utterance.voice = selectedVoice;
+    utterance.pitch = 1.5;
+    utterance.rate = 0.9;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+}
+
+// ===================== SHOW NUMBER POPUP =====================
+function showNumberPopup() {
+    const popup = document.getElementById('numberPopup');
+    const area = document.getElementById('numberArea');
+    popup.style.display = 'block';
+    area.innerHTML = ''; // clear previous numbers
+    
+
+    // Play background music
+    const music = document.getElementById('numberMusic');
+    music.currentTime = 0;
+    music.volume = 0.2;
+    music.play().catch(err => console.log(err));
+
+    // Create numbers 1 to 50
+    for(let i=1; i<=50; i++){
+        const box = document.createElement('div');
+        box.innerText = i;
+        box.style.width = '55px';
+        box.style.height = '55px';
+        box.style.background = getRandomColor();
+        box.style.borderRadius = '12px';
+        box.style.display = 'flex';
+        box.style.alignItems = 'center';
+        box.style.justifyContent = 'center';
+        box.style.fontWeight = 'bold';
+        box.style.fontSize = '20px';
+        box.style.color = '#333';
+        box.style.cursor = 'pointer';
+        box.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+
+        // Hover effect
+        box.addEventListener('mouseenter', () => {
+            box.style.transform = 'scale(1.3)';
+            box.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
+        });
+
+        
+        box.addEventListener('mouseleave', () => {
+            box.style.transform = 'scale(1)';
+            box.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+        });
+
+        // Click to hear number
+        box.addEventListener('click', () => {
+            speakJamie(`Number ${i}`);
+        });
+
+        area.appendChild(box);
+    }
+
+    autoHoverNumbers();
+
+    // Jamie chat message
+    addMessage("Yay! Let's count from 1 to 50! Click any number to hear it!", "jamie", "Jamie");
+    addMessage(jamieReply, "jamie", "Jamie");
+    speakJamie(jamieReply);
+
+    
+}
+
+// ===================== CLOSE POPUP =====================
+function closeNumberPopup() {
+    const popup = document.getElementById('numberPopup');
+    popup.style.display = 'none';
+
+    // Stop music
+    const music = document.getElementById('numberMusic');
+    music.pause();
+    music.currentTime = 0;
+}
+
+// ===================== INPUT LISTENER =====================
+document.getElementById('messageInput').addEventListener('keypress', function(e){
+    if(e.key === 'Enter'){
+        e.preventDefault();
+        const text = this.value.trim().toLowerCase();
+
+        if(text === 'abc') {
+            showAlphabetPopup();
+        } else if(text === '123' || text === 'counting') {
+            showNumberPopup();
+        } else {
+            sendMessage(); // normal chat
+        }
+
+        this.value = '';
+    }
+});
+
+// ===================== OPTIONAL: SEND BUTTON =====================
+document.getElementById('sendMessageBtn').addEventListener('click', function(){
+    const input = document.getElementById('messageInput');
+    const text = input.value.trim().toLowerCase();
+
+    if(text === 'abc') {
+        showAlphabetPopup();
+    } else if(text === '123' || text === 'counting') {
+        showNumberPopup();
+    } else {
+        sendMessage();
+    }
+
+    input.value = '';
+});
+
+function autoHoverNumbers() {
+    const area = document.getElementById('numberArea');
+    const boxes = area.children;
+    let i = 0;
+
+    function highlightNext() {
+        if(i > 0) {
+            // Previous number ko normal state me le aao
+            boxes[i-1].style.transform = 'scale(1)';
+            boxes[i-1].style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+        }
+        if(i < boxes.length){
+            // Current number highlight
+            boxes[i].style.transform = 'scale(1.3)';
+            boxes[i].style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
+
+            i++;
+            setTimeout(highlightNext, 700); // 0.7s delay per number
+        }
+    }
+
+    highlightNext();
+}
+
+
+
+
+// ------------------ TABLE POPUP JS ------------------
+
+// Random color helper
+function getRandomColor() {
+    const colors = ['#FFB6C1','#87CEFA','#FFD700','#90EE90','#FFA07A','#BA55D3','#40E0D0','#FF69B4','#FF6347','#7B68EE'];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Speak Jamie helper (female voice)
+function speakJamie(text){
+    let voices = window.speechSynthesis.getVoices();
+    if(!voices.length){
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = window.speechSynthesis.getVoices();
+            speakJamieVoice(text, voices);
+        }
+    } else {
+        speakJamieVoice(text, voices);
+    }
+}
+
+function speakJamieVoice(text, voices){
+    const utterance = new SpeechSynthesisUtterance(text);
+    // Female voice preference
+    const femaleVoice = voices.find(v => v.lang === 'en-US' && v.name.toLowerCase().includes('female')) 
+                        || voices.find(v => v.lang === 'en-US') 
+                        || voices[0];
+    utterance.voice = femaleVoice;
+    utterance.pitch = 1.2;
+    utterance.rate = 0.9;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+}
+
+
+// Show table popup
+function showTablePopup(tableNum) {
+    const popup = document.getElementById('tablePopup');
+    const area = document.getElementById('tableArea');
+    const title = document.getElementById('tableTitle');
+
+    popup.style.display = 'block';
+    area.innerHTML = '';
+    title.innerText = `📊 Table of ${tableNum} 📊`;
+
+    const music = document.getElementById('tableMusic');
+    music.currentTime = 0;
+    music.volume = 0.2;
+    music.play().catch(err => console.log(err));
+
+
+    // Show table in **columns (3 columns)** grid
+    area.style.display = 'grid';
+    area.style.gridTemplateColumns = 'repeat(3, 1fr)';
+    area.style.gap = '15px';
+    area.style.justifyItems = 'center';
+
+    for(let i = 1; i <= 10; i++){
+        const box = document.createElement('div');
+        box.innerText = `${tableNum} × ${i} = ${tableNum * i}`;
+        box.style.background = getRandomColor();
+        box.style.borderRadius = '15px';
+        box.style.padding = '15px';
+        box.style.fontSize = '18px';
+        box.style.fontWeight = 'bold';
+        box.style.boxShadow = '0 8px 20px rgba(0,0,0,0.2)';
+        box.style.cursor = 'pointer';
+        box.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+        box.style.textAlign = 'center';
+        box.style.width = '100%';
+
+        // Hover effect
+        box.addEventListener('mouseenter', () => {
+            box.style.transform = 'scale(1.2)';
+            box.style.boxShadow = '0 12px 25px rgba(0,0,0,0.3)';
+        });
+        box.addEventListener('mouseleave', () => {
+            box.style.transform = 'scale(1)';
+            box.style.boxShadow = '0 8px 20px rgba(0,0,0,0.2)';
+        });
+
+        // Voice on click
+        box.addEventListener('click', () => {
+            speakJamie(`${tableNum} times ${i} equals ${tableNum * i}`);
+        });
+
+        area.appendChild(box);
+    }
+
+    addMessage(`Great! Here is the table of ${tableNum}. Click any box to hear it!`, "jamie", "Jamie");
+    speakJamie(`Let's learn the table of ${tableNum}`);
+}
+
+// Close table popup
+function closeTablePopup(){
+    const popup = document.getElementById('tablePopup');
+    popup.style.display = 'none';
+
+    // Stop table music
+    const music = document.getElementById('tableMusic');
+    music.pause();
+    music.currentTime = 0;
+}
+
+
+// Check user input for table (supports 2 x 1 = , 2 * 1 = , 2 X 1 =)
+function checkForTable(text) {
+    const match = text.match(/table of (\d+)/i);
+    if(match) {
+        showTablePopup(parseInt(match[1]));
+        return true;
+    }
+
+    // Pattern: 2 x 1 = , 2 X 1 = , 2 * 1 =
+    const tablePattern = text.match(/^(\d+)\s*[\*xX]\s*\d+\s*=?$/);
+    if(tablePattern){
+        showTablePopup(parseInt(tablePattern[1]));
+        return true;
+    }
+
+    return false;
+}
+
+// Input handling
+const input = document.getElementById('messageInput');
+const sendBtn = document.getElementById('sendMessageBtn');
+
+function handleInput(e){
+    if(e.type === 'keypress' && e.key !== 'Enter') return;
+    e.preventDefault();
+
+    const text = input.value.trim().toLowerCase();
+    if(!text) return;
+
+    if(checkForTable(text)) {
+        input.value = '';
+        return;
+    }
+
+    // Add more commands like ABC, counting, addition...
+    if(text === 'abc') showAlphabetPopup();
+    else if(text === '123' || text === 'counting') showNumberPopup();
+    else sendMessage(); // normal chat
+    input.value = '';
+}
+
+input.addEventListener('keypress', handleInput);
+sendBtn.addEventListener('click', handleInput);
+
+
+
+// ================= PIANO POPUP =================
+let activePianoNotes = []; // Track currently playing notes
+
+function showPianoPopup(){
+    document.getElementById("pianoPopup").style.display = "block";
+
+    // Play background piano music
+    let pianoMusic = document.getElementById("pianoMusic");
+    if(!pianoMusic){
+        pianoMusic = document.createElement('audio');
+        pianoMusic.id = 'pianoMusic';
+        pianoMusic.src = '/static/audio/piano-loop.mp3'; // set your loop audio
+        pianoMusic.loop = true;
+        document.body.appendChild(pianoMusic);
+    }
+    pianoMusic.currentTime = 0;
+    pianoMusic.volume = 0.2;
+    pianoMusic.play();
+
+    // Jamie message (optional)
+    if(typeof addMessage === "function"){
+        addMessage("Yay! Let’s play piano 🎹 Click the keys!", "jamie", "Jamie");
+    }
+
+    // Voice (optional)
+    if(window.speechSynthesis){
+        speakJamie("Let's play piano");
+    }
+}
+
+function closePianoPopup(){
+    document.getElementById("pianoPopup").style.display = "none";
+
+    // Stop background music
+    const pianoMusic = document.getElementById("pianoMusic");
+    if(pianoMusic){
+        pianoMusic.pause();
+        pianoMusic.currentTime = 0;
+    }
+
+    // Stop all active notes
+    activePianoNotes.forEach(note => {
+        note.pause();
+        note.currentTime = 0;
+    });
+    activePianoNotes = [];
+}
+
+// ================= PLAY PIANO SOUND =================
+document.querySelectorAll(".key").forEach(key => {
+    key.addEventListener("click", () => {
+        const note = key.dataset.note;
+        const audio = new Audio(`/static/piano/${note}.mp3`);
+        audio.volume = 0.6;
+        audio.play();
+
+        // Track the note
+        activePianoNotes.push(audio);
+
+        // Remove from array when note ends
+        audio.addEventListener('ended', () => {
+            activePianoNotes = activePianoNotes.filter(a => a !== audio);
+        });
+    });
+});
+
+// ================= COMMAND HANDLER =================
+function checkForPiano(text){
+    if(text === "piano" || text === "play piano"){
+        showPianoPopup();
+        return true;
+    }
+    return false;
+}
+
+function handleInput(e){
+    if(e.type === 'keypress' && e.key !== 'Enter') return;
+    e.preventDefault();
+
+    const text = input.value.trim().toLowerCase();
+    if(!text) return;
+
+    // ✅ PIANO CHECK
+    if(checkForPiano(text)) {
+        input.value = '';
+        return;
+    }
+
+    if(checkForTable(text)) {
+        input.value = '';
+        return;
+    }
+
+    if(text === 'abc') showAlphabetPopup();
+    else if(text === '123' || text === 'counting') showNumberPopup();
+    else sendMessage();
+
+    input.value = '';
+}
+
+
+</script>
+</body>
+</html>

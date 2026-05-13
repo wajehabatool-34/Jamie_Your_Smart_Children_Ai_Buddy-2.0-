@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jamie - Children's AI Buddy | Login</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #6a5af9;
+            --secondary: #d665e0;
+            --accent: #4dccbd;
+            --light: #f8f9ff;
+            --dark: #2a2d43;
+            --success: #4ade80;
+            --danger: #f87171;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 1200px;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .login-left {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-left::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            top: -100px;
+            right: -100px;
+        }
+        
+        .login-left::after {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            bottom: -50px;
+            left: -50px;
+        }
+        
+        .brand-logo {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .brand-logo i {
+            margin-right: 10px;
+            font-size: 32px;
+        }
+        
+        .welcome-title {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .features-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 30px;
+        }
+        
+        .features-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features-list i {
+            background: rgba(255, 255, 255, 0.2);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        
+        .login-right {
+            background-color: white;
+            padding: 50px;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .login-header h2 {
+            color: var(--dark);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(106, 90, 249, 0.2);
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 20px;
+            top: 1rem;
+            color: #999;
+        }
+        
+        .btn-login {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 12px;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(106, 90, 249, 0.3);
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 90, 249, 0.4);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .btn-create-account {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 12px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .btn-create-account:hover {
+            background-color: #3dbba9;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(77, 204, 189, 0.3);
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 20px;
+            top: 1rem;
+            cursor: pointer;
+            color: #999;
+            z-index: 10;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .shape-1 {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+        }
+        
+        .shape-2 {
+            width: 120px;
+            height: 120px;
+            bottom: 15%;
+            right: 15%;
+        }
+        
+        .shape-3 {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            left: 20%;
+        }
+        
+        .alert-message {
+            display: none;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .alert-success {
+            background-color: rgba(74, 222, 128, 0.1);
+            color: #16a34a;
+            border-left: 4px solid #16a34a;
+        }
+        
+        .alert-danger {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+            border-left: 4px solid #dc2626;
+        }
+        
+        .alert-warning {
+            background-color: rgba(251, 191, 36, 0.1);
+            color: #d97706;
+            border-left: 4px solid #d97706;
+        }
+        
+        .password-strength {
+            height: 5px;
+            margin-top: 8px;
+            border-radius: 3px;
+            background: #e0e0e0;
+            overflow: hidden;
+        }
+        
+        .strength-meter {
+            height: 100%;
+            width: 0%;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        .weak { background-color: var(--danger); width: 33%; }
+        .medium { background-color: #fbbf24; width: 66%; }
+        .strong { background-color: var(--success); width: 100%; }
+        
+        .password-requirements {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .requirement {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3px;
+        }
+        
+        .requirement i {
+            font-size: 10px;
+            margin-right: 5px;
+        }
+        
+        .requirement.met {
+            color: var(--success);
+        }
+        
+        .requirement.unmet {
+            color: #999;
+        }
+        
+        /* Animation classes */
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .login-left {
+                padding: 40px 30px;
+            }
+            
+            .login-right {
+                padding: 40px 30px;
+            }
+            
+            .welcome-title {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+            
+            .login-left {
+                padding: 40px 30px;
+                text-align: center;
+            }
+            
+            .welcome-title {
+                font-size: 32px;
+            }
+            
+            .features-list {
+                text-align: left;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+            }
+            
+            .login-left, .login-right {
+                padding: 30px 20px;
+            }
+            
+            .welcome-title {
+                font-size: 28px;
+            }
+            
+            .brand-logo {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container d-flex animate__animated animate__fadeIn">
+        <!-- Left Side: Branding and Info -->
+        <div class="login-left col-md-6 col-12">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+            
+            <div class="brand-logo animate-fade-in">
+                <i class="fas fa-robot"></i> Jamie - AI Buddy
+            </div>
+            
+            <h1 class="welcome-title animate-fade-in" style="animation-delay: 0.1s">
+                Welcome to <br>Children's AI Buddy
+            </h1>
+            
+            <p class="welcome-subtitle animate-fade-in" style="animation-delay: 0.2s">
+                A safe, friendly, and educational AI companion designed specifically for children. Jamie helps kids learn, play, and grow in a secure digital environment.
+            </p>
+            
+            <ul class="features-list animate-fade-in" style="animation-delay: 0.3s">
+                <li><i class="fas fa-check"></i> Safe & child-friendly conversations</li>
+                <li><i class="fas fa-check"></i> Educational content & learning games</li>
+                <li><i class="fas fa-check"></i> Age-appropriate content filtering</li>
+                <li><i class="fas fa-check"></i> Interactive learning with rewards</li>
+                <li><i class="fas fa-check"></i> Parental controls & monitoring</li>
+            </ul>
+            
+            <div class="mt-4 animate-fade-in" style="animation-delay: 0.4s">
+                <small class="d-block"><i class="fas fa-shield-alt me-2"></i> 100% Safe & Secure</small>
+                <small class="d-block mt-2"><i class="fas fa-lock me-2"></i> Privacy Protected</small>
+            </div>
+        </div>
+        
+        <!-- Right Side: Login Form -->
+        <div class="login-right col-md-6 col-12">
+            <!-- Login Form (Visible by Default) -->
+            <div id="loginSection">
+                <div class="login-header">
+                    <h2>Login to Your Account</h2>
+                    <p>Enter your credentials to access Jamie</p>
+                </div>
+                
+                <!-- Alert Messages -->
+                <div id="successAlert" class="alert-message alert-success">
+                    <i class="fas fa-check-circle me-2"></i> Account created successfully! Please login.
+                </div>
+                
+                <div id="errorAlert" class="alert-message alert-danger">
+                    <i class="fas fa-exclamation-circle me-2"></i> Invalid email or password. Please try again.
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" method="POST" action="/">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <div class="position-relative">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                            <div class="input-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback" id="emailError">Please enter a valid email address.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="position-relative">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                            <span class="password-toggle" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        <div class="invalid-feedback" id="passwordError">Password must be at least 6 characters.</div>
+                    </div>
+                    
+                    <div class="form-group form-check d-flex justify-content-between align-items-center">
+                        <div>
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                        <a href="#" class="text-decoration-none" style="color: var(--primary);">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-login" id="loginButton">
+                        <span id="loginText">Login</span>
+                        <span id="loginSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
+                </form>
+                
+                <div class="divider">
+                    <span>Don't have an account?</span>
+                </div>
+                
+                <button type="button" class="btn btn-create-account" id="showCreateAccount">
+                    Create New Account
+                </button>
+                
+                <div class="text-center mt-4">
+                    <small class="text-muted">By logging in, you agree to our <a href="#" class="text-decoration-none" style="color: var(--primary);">Terms of Service</a> and <a href="#" class="text-decoration-none" style="color: var(--primary);">Privacy Policy</a></small>
+                </div>
+            </div>
+            
+            <!-- Create Account Form (Hidden by Default) -->
+            <div id="createAccountSection" style="display: none;">
+                <div class="login-header">
+                    <h2>Create Your Account</h2>
+                    <p>Join Jamie's learning community</p>
+                </div>
+                
+                <div id="warningAlert" class="alert-message alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i> <span id="warningText"></span>
+                </div>
+                
+                <form id="registerForm" action="/create_account" method="POST">
+                    <div class="form-group">
+                        <label for="regName" class="form-label">Parent Name *</label>
+                        <input type="text" class="form-control" id="regName" name="name" placeholder="Enter your full name" required>
+                        <div class="invalid-feedback" id="nameError">Please enter your name (at least 2 characters).</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="regEmail" class="form-label">Email Address *</label>
+                        <input type="email" class="form-control" id="regEmail" name="email" placeholder="Enter your email" required>
+                        <div class="invalid-feedback" id="regEmailError">Please enter a valid email address.</div>
+                        <small class="text-muted">This will be your login username</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="regPassword" class="form-label">Password *</label>
+                        <div class="position-relative">
+                            <input type="password" class="form-control" id="regPassword" name="password" placeholder="Create a password (min. 6 characters)" required>
+                            <span class="password-toggle" id="toggleRegPassword">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-meter" id="passwordStrength"></div>
+                        </div>
+                        <div class="password-requirements">
+                            <div class="requirement" id="lengthReq">
+                                <i class="fas fa-circle"></i> At least 6 characters
+                            </div>
+                            <div class="requirement" id="strengthReq">
+                                <i class="fas fa-circle"></i> Medium or strong password
+                            </div>
+                        </div>
+                        <div class="invalid-feedback" id="regPasswordError">Password must be at least 6 characters.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword" class="form-label">Confirm Password *</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                        <div class="invalid-feedback" id="confirmPasswordError">Passwords do not match.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="childName" class="form-label">Child's Name</label>
+                        <input type="text" class="form-control" id="childName" name="childName" placeholder="Enter your child's name" required>
+                        <small class="text-muted">We'll personalize the experience for your child</small>
+                    </div>
+                    
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="termsAgreement" required>
+                        <label class="form-check-label" for="termsAgreement">
+                            I agree to the <a href="#" class="text-decoration-none" style="color: var(--primary);">Terms of Service</a> and <a href="#" class="text-decoration-none" style="color: var(--primary);">Privacy Policy</a>
+                        </label>
+                        <div class="invalid-feedback" id="termsError">You must agree to the terms.</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-create-account" id="registerButton">
+                        <span id="registerText">Create Account</span>
+                        <span id="registerSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-link text-decoration-none" id="backToLogin">
+                        <i class="fas fa-arrow-left me-1"></i> Back to Login
+                    </button>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <small class="text-muted">* Required fields</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const loginSection = document.getElementById('loginSection');
+            const createAccountSection = document.getElementById('createAccountSection');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const showCreateAccountBtn = document.getElementById('showCreateAccount');
+            const backToLoginBtn = document.getElementById('backToLogin');
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleRegPassword = document.getElementById('toggleRegPassword');
+            const passwordInput = document.getElementById('password');
+            const regPasswordInput = document.getElementById('regPassword');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            const warningAlert = document.getElementById('warningAlert');
+            const passwordStrength = document.getElementById('passwordStrength');
+            const lengthReq = document.getElementById('lengthReq');
+            const strengthReq = document.getElementById('strengthReq');
+            
+            // Check URL for success parameter (account created)
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('account') === 'created') {
+                showAlert(successAlert);
+            }
+            
+            // Toggle password visibility
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+            
+            toggleRegPassword.addEventListener('click', function() {
+                const type = regPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                regPasswordInput.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+            
+            // Password strength checker
+            regPasswordInput.addEventListener('input', function() {
+                checkPasswordStrength(this.value);
+            });
+            
+            // Confirm password validation
+            confirmPasswordInput.addEventListener('input', function() {
+                validatePasswordMatch();
+            });
+            
+            // Toggle between login and create account forms
+            showCreateAccountBtn.addEventListener('click', function() {
+                loginSection.style.display = 'none';
+                createAccountSection.style.display = 'block';
+            });
+            
+            backToLoginBtn.addEventListener('click', function() {
+                createAccountSection.style.display = 'none';
+                loginSection.style.display = 'block';
+                resetForm(registerForm);
+                warningAlert.style.display = 'none';
+            });
+            
+            // Login form validation and submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Reset previous errors
+                resetErrors();
+                
+                // Get form values
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                
+                // Validate
+                let isValid = true;
+                
+                if (!validateEmail(email)) {
+                    showError('email', 'Please enter a valid email address.');
+                    isValid = false;
+                }
+                
+                if (password.length < 6) {
+                    showError('password', 'Password must be at least 6 characters.');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // Show loading state
+                    const loginButton = document.getElementById('loginButton');
+                    const loginText = document.getElementById('loginText');
+                    const loginSpinner = document.getElementById('loginSpinner');
+                    
+                    loginText.textContent = 'Logging in...';
+                    loginSpinner.classList.remove('d-none');
+                    loginButton.disabled = true;
+                    
+                    // Submit the form to Flask backend
+                    this.submit();
+                }
+            });
+            
+            // Register form validation and submission
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Reset previous errors
+                resetErrors();
+                
+                // Get form values
+                const name = document.getElementById('regName').value.trim();
+                const email = document.getElementById('regEmail').value.trim();
+                const password = document.getElementById('regPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const childName = document.getElementById('childName').value.trim();
+                const termsAgreed = document.getElementById('termsAgreement').checked;
+                
+                // Validate
+                let isValid = true;
+                
+                if (name.length < 2) {
+                    showError('regName', 'Please enter your name (at least 2 characters).');
+                    isValid = false;
+                }
+                
+                if (!validateEmail(email)) {
+                    showError('regEmail', 'Please enter a valid email address.');
+                    isValid = false;
+                }
+                
+                if (password.length < 6) {
+                    showError('regPassword', 'Password must be at least 6 characters.');
+                    isValid = false;
+                }
+                
+                if (password !== confirmPassword) {
+                    showError('confirmPassword', 'Passwords do not match.');
+                    isValid = false;
+                }
+                
+                if (!termsAgreed) {
+                    showError('termsAgreement', 'You must agree to the terms.');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // Show loading state
+                    const registerButton = document.getElementById('registerButton');
+                    const registerText = document.getElementById('registerText');
+                    const registerSpinner = document.getElementById('registerSpinner');
+                    
+                    registerText.textContent = 'Creating Account...';
+                    registerSpinner.classList.remove('d-none');
+                    registerButton.disabled = true;
+                    
+                    // Prepare form data
+                    const formData = new FormData();
+                    formData.append('name', name);
+                    formData.append('email', email);
+                    formData.append('password', password);
+                    formData.append('childName', childName);
+                    
+                    // Send POST request to Flask backend
+                    fetch('/create_account', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Successful registration - redirect to chat
+                            window.location.href = '/chat';
+                        } else {
+                            return response.text().then(text => {
+                                throw new Error(text || 'Registration failed');
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        // Reset button state
+                        registerText.textContent = 'Create Account';
+                        registerSpinner.classList.add('d-none');
+                        registerButton.disabled = false;
+                        
+                        // Show error message
+                        showWarning(error.message || 'Registration failed. Please try again.');
+                        
+                        // Add shake animation to form
+                        registerForm.classList.add('animate__animated', 'animate__headShake');
+                        setTimeout(() => {
+                            registerForm.classList.remove('animate__animated', 'animate__headShake');
+                        }, 1000);
+                    });
+                }
+            });
+            
+            // Helper functions
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+            
+            function checkPasswordStrength(password) {
+                let strength = 0;
+                
+                // Check length
+                if (password.length >= 6) {
+                    strength++;
+                    lengthReq.classList.remove('unmet');
+                    lengthReq.classList.add('met');
+                    lengthReq.innerHTML = '<i class="fas fa-check-circle"></i> At least 6 characters';
+                } else {
+                    lengthReq.classList.remove('met');
+                    lengthReq.classList.add('unmet');
+                    lengthReq.innerHTML = '<i class="fas fa-circle"></i> At least 6 characters';
+                }
+                
+                // Check for lowercase and uppercase
+                if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+                
+                // Check for numbers
+                if (/\d/.test(password)) strength++;
+                
+                // Check for special characters
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+                
+                // Update strength meter
+                passwordStrength.className = 'strength-meter';
+                if (password.length === 0) {
+                    passwordStrength.style.width = '0%';
+                } else if (strength <= 1) {
+                    passwordStrength.classList.add('weak');
+                    strengthReq.classList.remove('met');
+                    strengthReq.classList.add('unmet');
+                    strengthReq.innerHTML = '<i class="fas fa-circle"></i> Medium or strong password';
+                } else if (strength <= 3) {
+                    passwordStrength.classList.add('medium');
+                    strengthReq.classList.remove('unmet');
+                    strengthReq.classList.add('met');
+                    strengthReq.innerHTML = '<i class="fas fa-check-circle"></i> Medium or strong password';
+                } else {
+                    passwordStrength.classList.add('strong');
+                    strengthReq.classList.remove('unmet');
+                    strengthReq.classList.add('met');
+                    strengthReq.innerHTML = '<i class="fas fa-check-circle"></i> Medium or strong password';
+                }
+                
+                return strength;
+            }
+            
+            function validatePasswordMatch() {
+                const password = regPasswordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                
+                if (confirmPassword.length > 0 && password !== confirmPassword) {
+                    confirmPasswordInput.classList.add('is-invalid');
+                    return false;
+                } else {
+                    confirmPasswordInput.classList.remove('is-invalid');
+                    return true;
+                }
+            }
+            
+            function showError(fieldId, message) {
+                const field = document.getElementById(fieldId);
+                const errorElement = document.getElementById(fieldId + 'Error');
+                
+                if (field) {
+                    field.classList.add('is-invalid');
+                }
+                
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.style.display = 'block';
+                }
+            }
+            
+            function resetErrors() {
+                // Remove invalid class from all inputs
+                const inputs = document.querySelectorAll('.form-control');
+                inputs.forEach(input => {
+                    input.classList.remove('is-invalid');
+                });
+                
+                // Remove from checkbox
+                const termsCheckbox = document.getElementById('termsAgreement');
+                if (termsCheckbox) {
+                    termsCheckbox.classList.remove('is-invalid');
+                }
+                
+                // Hide all error messages
+                const errorMessages = document.querySelectorAll('.invalid-feedback');
+                errorMessages.forEach(error => {
+                    error.style.display = 'none';
+                });
+                
+                // Hide alerts
+                if (successAlert) successAlert.style.display = 'none';
+                if (errorAlert) errorAlert.style.display = 'none';
+                if (warningAlert) warningAlert.style.display = 'none';
+            }
+            
+            function showAlert(alertElement) {
+                if (alertElement) {
+                    alertElement.style.display = 'block';
+                    
+                    // Hide alert after 5 seconds
+                    setTimeout(() => {
+                        alertElement.style.display = 'none';
+                    }, 5000);
+                }
+            }
+            
+            function showWarning(message) {
+                if (warningAlert) {
+                    document.getElementById('warningText').textContent = message;
+                    warningAlert.style.display = 'block';
+                    
+                    // Hide alert after 5 seconds
+                    setTimeout(() => {
+                        warningAlert.style.display = 'none';
+                    }, 5000);
+                }
+            }
+            
+            function resetForm(form) {
+                form.reset();
+                resetErrors();
+                if (passwordStrength) {
+                    passwordStrength.className = 'strength-meter';
+                    passwordStrength.style.width = '0%';
+                }
+                if (lengthReq) {
+                    lengthReq.classList.remove('met');
+                    lengthReq.classList.add('unmet');
+                }
+                if (strengthReq) {
+                    strengthReq.classList.remove('met');
+                    strengthReq.classList.add('unmet');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
