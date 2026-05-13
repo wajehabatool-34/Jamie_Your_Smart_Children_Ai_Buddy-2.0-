@@ -50,7 +50,7 @@ pip install fastapi uvicorn flask pydantic
 ### 2. Start the FastAPI chat backend
 
 ```powershell
-cd c:\Jamie_Your_Smart_Children_Ai_Buddy\Jamie_Your_Smart_Children_Ai_Buddy
+cd c:\Jamie_Your_Smart_Children_Ai_Buddy
 uvicorn fastapi_app:app --reload --host 127.0.0.1 --port 8000
 ```
 
@@ -59,7 +59,7 @@ uvicorn fastapi_app:app --reload --host 127.0.0.1 --port 8000
 In a second terminal:
 
 ```powershell
-cd c:\Jamie_Your_Smart_Children_Ai_Buddy\Jamie_Your_Smart_Children_Ai_Buddy
+cd c:\Jamie_Your_Smart_Children_Ai_Buddy
 python flask_app.py
 ```
 
